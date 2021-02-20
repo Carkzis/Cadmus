@@ -1,5 +1,6 @@
 import tkinter as tk
 from collections import deque
+from playsound import playsound
 
 def colour_test():
     """Changes the colour of the text box based on the RGB values provided."""
@@ -9,9 +10,11 @@ def colour_test():
             continue
         else:
             rgb_list_item = int(rgb[i].get())
+            if rgb_list_item > 255 or rgb_list_item < 0:
+                print("Invalid colour!")
+                return
             rgb_list.append(rgb_list_item)
     rgb_string = _rbg_convert(rgb_list)
-    print(rgb_string)
     txt_colour_check["bg"] = rgb_string
     return rgb_string
 
@@ -61,6 +64,18 @@ btn_apply_colour.grid(row=0, column=0, pady=5)
 # Colour test frame
 txt_colour_check = tk.Text(frm_colours_btn, width=20, height=5)
 txt_colour_check.grid(row=1, column=0)
+
+# Soundboard fram
+frm_sounds = tk.Frame(window)
+frm_sounds.grid(row=6, column=0)
+snd_f = lambda: playsound('cow.mp3')
+btn_moo = tk.Button(
+    frm_sounds,
+    text="Moo?",
+    width=15,
+    command=snd_f
+)
+btn_moo.grid(row=0, column=0, pady=5)
 
 # Main GUI loop
 window.mainloop()
