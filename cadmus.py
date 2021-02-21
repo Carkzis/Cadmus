@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import font
 from collections import deque
 from playsound import playsound
+from note import Note
 import random
 import logging # My debugger
 logging.basicConfig(level=logging.DEBUG,
@@ -49,6 +50,10 @@ def _rbg_convert(rgb=[255, 255, 255]):
     txt_colour_check["bg"] = f'#{r:02x}{g:02x}{b:02x}'
     return txt_colour_check["bg"]
 
+def create_new_note():
+    new_note = tk.Toplevel(window)
+    app = Note(new_note, txt_colour_check["bg"])
+
 # Settings
 background_colour = "steel blue"
 button_colour = "sky blue"
@@ -76,12 +81,13 @@ font_tuple = ("Comic Sans MS", 30, "bold")
 lbl_title.configure(font=font_tuple)
 lbl_title.grid(row=0, column=0)
 
-# TODO Create a button to create a new note
+# Create a button to create a new note
 btn_new_note = tk.Button(
     window,
     text="Create Note",
     width=15,
-    bg=button_colour
+    bg=button_colour,
+    command=create_new_note
 )
 btn_new_note.grid(row=1, column=0, pady=5, padx=1)
 
@@ -94,18 +100,9 @@ btn_load_note = tk.Button(
 )
 btn_load_note.grid(row=2, column=0, pady=5, padx=1)
 
-# TODO Create a button to save open sticky notes
-btn_save_all = tk.Button(
-    window,
-    text="Save Open Notes",
-    width=15,
-    bg=button_colour
-)
-btn_save_all.grid(row=3, column=0, pady=5, padx=1)
-
 # Create colours frame and put it in the window
 frm_colours = tk.Frame(master=window, bg=background_colour)
-frm_colours.grid(row=4, column=0)
+frm_colours.grid(row=3, column=0)
 # Create a list for the colour labels and grids
 rgb = []
 # Create dictionary so correct colour is applied at the correct part of loop
@@ -129,7 +126,7 @@ for i in range(0, len(rgb_text)*2):
 
 # Colours button frame
 frm_colours_btn = tk.Frame(window, bg=background_colour)
-frm_colours_btn.grid(row=5, column=0)
+frm_colours_btn.grid(row=4, column=0)
 # Defined colour
 btn_apply_colour = tk.Button(
     frm_colours_btn,
@@ -155,7 +152,7 @@ txt_colour_check.grid(row=1, column=0, columnspan=2, sticky="ew")
 
 # Soundboard frame
 frm_sounds = tk.Frame(window, bg=background_colour)
-frm_sounds.grid(row=6, column=0)
+frm_sounds.grid(row=5, column=0)
 snd_f = lambda: playsound(
     random.choice(['cow.mp3', 'cow2.mp3', 'cow3.mp3', 'cow4.mp3', 'cow5.mp3'])
 )
