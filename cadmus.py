@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import font
+from tkinter.filedialog import askopenfilename, asksaveasfilename
 from collections import deque
 from playsound import playsound
 from note import Note
@@ -51,8 +52,21 @@ def _rbg_convert(rgb=[255, 255, 255]):
     return txt_colour_check["bg"]
 
 def create_new_note():
+    """Create a new note object."""
     new_note = tk.Toplevel(window)
-    app = Note(new_note, txt_colour_check["bg"])
+    return Note(new_note, txt_colour_check["bg"])
+
+def load_note():
+    """Open a file for editing."""
+    this_file = askopenfilename(
+        filetypes=[("Text Files", "*.txt")]
+    )
+    if not this_file:
+        return
+    with open(this_file, "r") as read_file:
+        new_note = tk.Toplevel(window)
+        text = read_file.read()
+    return Note(new_note, txt_colour_check["bg"], text)
 
 # Settings
 background_colour = "steel blue"
@@ -91,12 +105,13 @@ btn_new_note = tk.Button(
 )
 btn_new_note.grid(row=1, column=0, pady=5, padx=1)
 
-# TODO Create a button to load a sticky note
+# Create a button to load a sticky note
 btn_load_note = tk.Button(
     window,
     text="Load Note",
     width=15,
-    bg=button_colour
+    bg=button_colour,
+    command=load_note
 )
 btn_load_note.grid(row=2, column=0, pady=5, padx=1)
 

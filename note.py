@@ -9,7 +9,7 @@ logging.disable(logging.CRITICAL) # this can disable the debugging
 logging.debug('Start of program')
 
 class Note:
-    def __init__(self, window, box_colour):
+    def __init__(self, window, box_colour, text=''):
         # Settings
         self.window = window
         self.box_colour = box_colour
@@ -31,6 +31,7 @@ class Note:
         # Text edit window
         self.txt_edit = tk.Text(window, bg=self.box_colour)
         self.txt_edit.grid(row=0, column=0, sticky="nsew")
+        self.txt_edit.insert(tk.END, text)
 
         # Frame for the buttons
         self.frm_buttons = tk.Frame(window)
