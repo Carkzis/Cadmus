@@ -27,9 +27,9 @@ class Main:
         window.configure(bg=self.background_colour)
         window.resizable(0, 0) # Don't allow resizing
 
-        self.window.columnconfigure(0, weight=1, minsize=200)
+        window.columnconfigure(0, weight=1, minsize=200)
         for i in range(7):
-            self.window.rowconfigure(i, weight=1, minsize=25)
+            window.rowconfigure(i, weight=1, minsize=25)
 
         # Create big label for title
         self.lbl_title = tk.Label(
@@ -53,7 +53,7 @@ class Main:
 
         # Create a button to load a sticky note
         self.btn_load_note = tk.Button(
-            self.window,
+            window,
             text="Load Note",
             width=15,
             bg=self.button_colour,
@@ -62,7 +62,7 @@ class Main:
         self.btn_load_note.grid(row=2, column=0, pady=5, padx=1)
 
         # Create colours frame and put it in the window
-        self.frm_colours = tk.Frame(master=self.window,
+        self.frm_colours = tk.Frame(master=window,
             bg=self.background_colour)
         self.frm_colours.grid(row=3, column=0)
         # Create a list for the colour labels and grids
@@ -88,7 +88,7 @@ class Main:
                 self.zero.set(255)
 
         # Colours button frame
-        self.frm_colours_btn = tk.Frame(self.window, bg=self.background_colour)
+        self.frm_colours_btn = tk.Frame(window, bg=self.background_colour)
         self.frm_colours_btn.grid(row=4, column=0)
         # Defined colour
         self.btn_apply_colour = tk.Button(
@@ -115,7 +115,7 @@ class Main:
         self.txt_colour_check.grid(row=1, column=0, columnspan=2, sticky="ew")
 
         # Soundboard frame
-        self.frm_sounds = tk.Frame(self.window, bg=self.background_colour)
+        self.frm_sounds = tk.Frame(window, bg=self.background_colour)
         self.frm_sounds.grid(row=5, column=0)
         self.snd_f = lambda: playsound(
             random.choice(['cow.mp3', 'cow2.mp3', 'cow3.mp3', 'cow4.mp3',
@@ -175,7 +175,7 @@ class Main:
 
     def create_new_note(self):
         """Create a new note object."""
-        self.new_note = tk.Toplevel(self.window)
+        self.new_note = tk.Toplevel(window)
         return Note(self.new_note, self.txt_colour_check["bg"])
 
     def load_note(self):
@@ -186,7 +186,7 @@ class Main:
         if not self.this_file:
             return
         with open(self.this_file, "r") as self.read_file:
-            self.new_note = tk.Toplevel(self.window)
+            self.new_note = tk.Toplevel(window)
             self.text = self.read_file.read()
         return Note(self.new_note, self.txt_colour_check["bg"], self.text)
 
