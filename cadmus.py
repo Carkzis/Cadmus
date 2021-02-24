@@ -21,7 +21,6 @@ class Main:
         self.title_colour = "midnight blue"
 
         # Create main window and title it.
-        self.window = window
         window.geometry("300x350") # set window size from the start
         window.title("Cadmus")
         window.configure(bg=self.background_colour)
@@ -43,7 +42,7 @@ class Main:
 
         # Create a button to create a new note
         self.btn_new_note = tk.Button(
-            self.window,
+            window,
             text="Create Note",
             width=15,
             bg=self.button_colour,
