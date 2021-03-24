@@ -80,7 +80,7 @@ class Main:
                     master=frm_colours,
                     text=rgb_text.popleft(),
                     bg=background_colour
-                    ))
+                ))
                 self.rgb[i].grid(row=0, column=i, sticky="se")
             else:
                 # Set initial values for the entry boxes to zero
