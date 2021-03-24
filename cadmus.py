@@ -67,7 +67,7 @@ class Main:
         frm_colours.grid(row=3, column=0)
         # Create a list for the colour labels and grids
         self.rgb = []
-        # Create dictionary so correct colour is applied at the
+        # Create deque so correct colour is applied at the
         # correct part of loop
         rgb_text = deque(["Red", "Green", "Blue"])
 
@@ -76,8 +76,11 @@ class Main:
             # Zero and even numbers will be labels, odds will be entry boxes for
             # the rbg values, these get added to a list
             if i == 0 or i % 2 == 0:
-                self.rgb.append(tk.Label(master=frm_colours,
-                text=rgb_text.popleft(), bg=background_colour))
+                self.rgb.append(tk.Label(
+                    master=frm_colours,
+                    text=rgb_text.popleft(),
+                    bg=background_colour
+                    ))
                 self.rgb[i].grid(row=0, column=i, sticky="se")
             else:
                 # Set initial values for the entry boxes to zero
