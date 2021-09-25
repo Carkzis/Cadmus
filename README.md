@@ -8,7 +8,7 @@ This is a Python program written using Tkinter, and allows to to open a new "not
 
 ## Dependencies
 * Python 3.8 (has not been tested above or below this version).
-* Windows 10 (has not been tested on macOS or Linus).
+* Windows 10 (has not been tested on macOS or Linux).
 
 ## Installing
 * You can download the code from the Cadmus repository by clicking "Code", then "Download ZIP".
